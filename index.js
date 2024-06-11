@@ -102,15 +102,15 @@ app.post('/ussd', (req, res) => {
 
             // Insert voting record into the database
             const voteData = {
-                session_id: sessionId,
+                my_session: sessionId,
                 phone_number: phoneNumber,
                 user_name: userNames[phoneNumber],
-                language_used: userLanguages[phoneNumber],
-                voted_candidate: candidateNames[candidateIndex],
-                voting_time: new Date() // Add current timestamp
+                Ururimi: userLanguages[phoneNumber],
+                Uwo_natoye: candidateNames[candidateIndex],
+                Igihe: new Date() // Add current timestamp
             };
 
-            const query = 'INSERT INTO voting_data SET ?';
+            const query = 'INSERT INTO Voting_MS SET ?';
             db.query(query, voteData, (err, result) => {
                 if (err) {
                     console.error('Error inserting data into database:', err.stack);
