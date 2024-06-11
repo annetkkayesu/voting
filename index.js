@@ -26,11 +26,11 @@ db.connect(err => {
 
 // In-memory storage for votes (for simplicity)
 let votes = {
-    "Nshimiyimana. ": 0,
-    "Ishimwe. ": 0,
-    "Ntirenganya Juma. ": 0,
-    "Gatesi. ": 0,
-    "Muteteri H. ": 0
+    "annet. ": 0,
+    "kayesu. ": 0,
+    "collins . ": 0,
+    "christella. ": 0,
+    "kellen. ": 0
 };
 
 // In-memory storage for user data (for simplicity)
@@ -50,14 +50,14 @@ app.post('/ussd', (req, res) => {
     // Determine next action based on user input
     if (userInput.length === 1 && userInput[0] === '') {
         // First level menu: Language selection
-        response = `CON Welcome to NEC ease voting\n`;
+        response = `CON Welcome to voting system\n`;
         response += `1. English\n`;
         response += `2. Kinyarwanda`;
     } else if (userInput.length === 1 && userInput[0] !== '') {
         // Save user's language choice and move to the name input menu
         userLanguages[phoneNumber] = userInput[0] === '1' ? 'en' : 'rw';
         response = userLanguages[phoneNumber] === 'en' ? 
-            `CON Please enter your name:` : 
+            `CON  enter your name:` : 
             `CON Injiza izina ryawe:`;
     } else if (userInput.length === 2) {
         // Save user's name
@@ -73,12 +73,12 @@ app.post('/ussd', (req, res) => {
             if (voters.has(phoneNumber)) {
                 response = userLanguages[phoneNumber] === 'en' ? 
                     `END You have already voted. Thank you!` : 
-                    `END Biragara ko Mwatoye rimwe ryemewe. !`;
+                    `END mwasoje gutora. !`;
             } else {
                 // Voting option selected
                 response = userLanguages[phoneNumber] === 'en' ? 
-                    `CON Select a candidate:\n1. Raymond IGABINEZA\n2. Florence UMUTONIWASE\n3. Jean Paul KWIBUKA\n4. Gaella UWAYO\n5. Danny HABIMANA` : 
-                    `CON Hitamo umukandida:\n1. Raymond IGABINEZA\n2. Florence UMUTONIWASE\n3. Jean Paul KWIBUKA\n4. Gaella UWAYO\n5. Danny HABIMANA`;
+                    `CON Select a candidate:\n1. annet\n2. kayesu\n3. collins\n4. christella\n5.kellen` : 
+                    `CON Hitamo umukandida:\n1.annet\n2. kayesu\n3. collins\n4. christella\n5.kellen`;
             }
         } else if (userInput[2] === '2') {
             // View votes option selected
@@ -119,7 +119,7 @@ app.post('/ussd', (req, res) => {
         } else {
             response = userLanguages[phoneNumber] === 'en' ? 
                 `END Invalid selection. Please try again.` : 
-                `END Amahitamo Adahwitse. Ongera ugerageze.`; 
+                `END amahitamo atariyo. Ongera ugerageze.`; 
         }
     }
 
